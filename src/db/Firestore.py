@@ -20,3 +20,12 @@ class Firestore:
         db = firestore.client()
         doc_ref = db.collection(collection_name).document(document_name)
         doc_ref.set(json_obj)
+
+    def get_document(self, collection_name:str, document_name:str):
+        db = firestore.client()
+        doc_ref = db.collection(collection_name).document(document_name)
+        doc = doc_ref.get()
+        
+        if doc.exists:
+            return doc.to_dict()
+        return {}
