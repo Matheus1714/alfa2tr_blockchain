@@ -9,3 +9,4 @@ firebase_config = {
     'appId': "1:833286290040:web:cb172431181216ecb44b8d",
     'measurementId': "G-8JJ9J6B22H"
 }
+
