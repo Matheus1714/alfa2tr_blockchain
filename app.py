@@ -1,11 +1,13 @@
 from flask import Flask
-from src.models.Blockchain import BlockChain
+from src.models.Blockchain import Blockchain
 from routes import routes
 
 if __name__ == '__main__':
     app = Flask(__name__)
 
-    blockchain = BlockChain()
+    app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
+
+    blockchain = Blockchain()
 
     routes(app, blockchain)
     
