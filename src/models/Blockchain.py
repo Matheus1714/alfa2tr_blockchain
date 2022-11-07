@@ -7,11 +7,19 @@ from src.db.Firestore import Firestore
 class Blockchain:
 
     cryoto = CryptoUtils()
+    db = Firestore()
 
     def __init__(self) -> None:
-        self.chain = []
+        self.set_chain()
+
+    def create_genesis(self):
         self.create_block(proof=1, previous_hash='0')
-    
+
+    def set_chain(self):
+        self.chain = self.db.get_doc_list('blockchain')
+        if len(self.chain) == 0:
+            self.create_genesis()
+
     def create_block(self, proof, previous_hash):
         block = {
             'index': len(self.chain) + 1,
@@ -19,8 +27,10 @@ class Blockchain:
             'proof': proof,
             'previous_hash': previous_hash
         }
-        self.chain.append(block)
-        return block
+        id = self.cryoto.generate_key()
+        self.db.add_json_obj(block, 'blockchain', id)
+        self.set_chain()
+        return block, id
     
     def get_previous_block(self):
         return self.chain[-1]
