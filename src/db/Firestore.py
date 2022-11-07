@@ -29,3 +29,14 @@ class Firestore:
         if doc.exists:
             return doc.to_dict()
         return {}
+    
+    def get_doc_list(self, collection_name):
+        db = firestore.client()
+        coll_ref = db.collection(collection_name)
+        docs = coll_ref.stream()
+        doc_list = []
+        for doc in docs:
+            doc_list.append(doc.to_dict())
+        return doc_list
+
+
