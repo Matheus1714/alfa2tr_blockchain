@@ -1,14 +1,17 @@
 from flask import Flask
 from src.models.Blockchain import Blockchain
 from routes import routes
+from uuid import uuid4
 
 if __name__ == '__main__':
     app = Flask(__name__)
+
+    node_address = str(uuid4()).replace('-', '')
 
     app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
     blockchain = Blockchain()
 
-    routes(app, blockchain)
+    routes(app, blockchain, node_address)
     
     app.run(host='0.0.0.0', port=5000)
