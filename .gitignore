@@ -1,3 +1,3 @@
 venv
 **/*.pyc
-configFirebase.json
+# configFirebase.json
