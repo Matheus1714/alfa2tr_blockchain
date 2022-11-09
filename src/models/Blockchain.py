@@ -13,7 +13,8 @@ class Blockchain:
 
     def __init__(self) -> None:
         self.set_transactions()
-        self.set_chain()
+        # self.set_chain()
+        self.chain = []
         self.set_nodes()
 
     def set_nodes(self):
