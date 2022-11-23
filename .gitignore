@@ -2,3 +2,4 @@ venv
 **/*.pyc
 configFirebase.json
 *.code-workspace
+*.ino
