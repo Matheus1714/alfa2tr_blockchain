@@ -92,3 +92,27 @@ def routes(app, blockchain:Blockchain, node_address):
             }
         return jsonify(response), 201
     
+    @app.route('/collect_audio', methods=['GET'])
+    def collect_audio():
+        
+        response = {
+            "msg": "get audio sucess"
+        }
+
+        return jsonify(response), 200
+
+    @app.route('/get_info/<int:id_aluno>', methods=['GET'])
+    def get_info(id_aluno):
+        response = {
+            "msg": ""
+        }
+        return jsonify(response), 200
+
+    @app.route('/', methods=['GET'])
+    def homepage():
+        response = {
+            "msg": "initial page"
+        }
+        return jsonify(response), 200
+
+
