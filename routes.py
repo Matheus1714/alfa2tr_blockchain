@@ -20,7 +20,7 @@ def routes(app, blockchain:Blockchain, node_address):
             'previous_hash': block['previous_hash'],
             'transactions': block['transactions']
         }
-        return jsonify(response), 200
+        return jsonify(response, indent=2, sort_keys=False), 200
 
     @app.route('/get_chain', methods = ['GET'])
     def get_chain():
@@ -28,7 +28,7 @@ def routes(app, blockchain:Blockchain, node_address):
             'chain': blockchain.chain,
             'length': len(blockchain.chain)
         }
-        return jsonify(response), 200
+        return jsonify(response, indent=2, sort_keys=False), 200
 
     @app.route('/is_valid', methods = ['GET'])
     def is_valid():
@@ -43,7 +43,7 @@ def routes(app, blockchain:Blockchain, node_address):
                 'msg': 'blockchain invalid'
             }
         
-        return jsonify(response), 200
+        return jsonify(response, indent=2, sort_keys=False), 200
     
     @app.route('/add_transaction', methods = ['POST'])
     def add_transaction():
@@ -53,12 +53,12 @@ def routes(app, blockchain:Blockchain, node_address):
             response = {
                 'msg': 'Some elements are missing'
             }
-            return jsonify(response), 400
+            return jsonify(response, indent=2, sort_keys=False), 400
         index = blockchain.add_transaction(**transaction)
         response = {
             'msg': f'created transaction in block {index}',
         }
-        return jsonify(response), 201
+        return jsonify(response, indent=2, sort_keys=False), 201
     
     @app.route('/connect_node', methods = ['POST'])
     def connect_node():
@@ -68,14 +68,14 @@ def routes(app, blockchain:Blockchain, node_address):
             response = {
                 'msg': 'empty nodes'
             }
-            return jsonify(response), 400
+            return jsonify(response, indent=2, sort_keys=False), 400
         for node in nodes:
             blockchain.add_node(node)
         response = {
             'msg': 'all nodes connecteds',
             'total_nodes': list(blockchain.nodes)
         }
-        return jsonify(response), 201
+        return jsonify(response, indent=2, sort_keys=False), 201
 
     @app.route('/replace_chain', methods=['GET'])
     def replace_chain():
@@ -90,7 +90,7 @@ def routes(app, blockchain:Blockchain, node_address):
                 'msg': 'not replaced',
                 'actual_chain': blockchain.chain
             }
-        return jsonify(response), 201
+        return jsonify(response, indent=2, sort_keys=False), 201
     
     @app.route('/collect_audio', methods=['GET'])
     def collect_audio():
@@ -99,20 +99,20 @@ def routes(app, blockchain:Blockchain, node_address):
             "msg": "get audio sucess"
         }
 
-        return jsonify(response), 200
+        return jsonify(response, indent=2, sort_keys=False), 200
 
     @app.route('/get_info/<int:id_aluno>', methods=['GET'])
     def get_info(id_aluno):
         response = {
             "msg": ""
         }
-        return jsonify(response), 200
+        return jsonify(response, indent=2, sort_keys=False), 200
 
     @app.route('/', methods=['GET'])
     def homepage():
         response = {
             "msg": "initial page"
         }
-        return jsonify(response), 200
+        return jsonify(response, indent=2, sort_keys=False), 200
 
 
